@@ -62,6 +62,8 @@ void destroyStack(Stack* s);
 /// <param name="data"> the character to push into the stack</param>
 void push(Stack* s, char data);
 
+charNode* addToHead(charNode* head, charNode* toAdd);
+
 /// <summary>
 /// 
 /// </summary>
