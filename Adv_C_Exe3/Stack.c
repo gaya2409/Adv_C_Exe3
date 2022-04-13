@@ -15,7 +15,7 @@
 void initStack(Stack* s)
 {
 	s->head = NULL;
-	
+
 }
 
 void destroyStack(Stack* s)
@@ -43,7 +43,7 @@ void push(Stack* s, char data)
 charNode* addToHead(charNode* head, charNode* toAdd) {
 	toAdd->next = head;
 	head = toAdd;
-	return head; 
+	return head;
 }
 
 char pop(Stack* s) {
@@ -52,28 +52,26 @@ char pop(Stack* s) {
 	if (isEmptyStack(s)) { printf("\nSTACK IS EMPTY"); return 0; }
 	res = s->head->data;
 	removeItem(&(s->head));//pop it from the stack 
-		return(res);
+	return(res);
 }
 
 
-	void removeItem(charNode **head) {
-		if (*head == NULL) return; //if stack empty
-		charNode* tmp = *head;
-		*head = (*head)->next;
-		free(tmp);
+void removeItem(charNode** head) {
+	if (*head == NULL) return; //if stack empty
+	charNode* tmp = *head;
+	*head = (*head)->next;
+	free(tmp);
 }
 
 
 int isEmptyStack(const Stack* s)
 {
 	return (!(s->head));
-
-	// add your code here
 }
 
 
 
-void display(Stack*s)
+void display(Stack* s)
 {
 	print(s->head);
 }
@@ -95,7 +93,7 @@ void flipBetweenHashes(const char* sentence)
 	Stack* reverse;
 	initStack(reverse);
 	for (int i = 0; i < strlen(sentence); i++) {
-		
+
 		if (sentence[i] == '#') {
 			int j = 0;
 
@@ -106,15 +104,28 @@ void flipBetweenHashes(const char* sentence)
 			display(reverse);
 		}
 		else printf("%d", sentence[i]);
-		}
+	}
 }
 
 
 
 int isPalindrome(Stack* s)
 {
-	// add your code here
+	Stack* x;
+	x = (Stack*)malloc(sizeof(Stack));
+	initStack(x);
+	charNode* current = s->head;
+	while (current != NULL) {
+		push(x, current->data);
+		current = current->next;
+	}
+	while (!isEmptyStack(s)) {
+		if (pop(s) == pop(x)) {
+		}
+		else return 0;
+	}
 }
+
 
 void rotateStack(Stack* s, int n)
 {
