@@ -120,14 +120,44 @@ int isPalindrome(Stack* s)
 		current = current->next;
 	}
 	while (!isEmptyStack(s)) {
-		if (pop(s) == pop(x)) {
-		}
-		else return 0;
+		if (pop(s) != pop(x))  return 0;
 	}
+	return 1;
 }
 
 
 void rotateStack(Stack* s, int n)
 {
-	// add your code here
+
+	if (n < 0 || isEmptyStack(s)) return;
+
+	charNode* current = s->head;
+	int counter = 0;
+	while (current != NULL) {
+		current = current->next;
+		counter++;
+	}
+	if (n > counter) return;
+
+	Stack* x = (Stack*)malloc(sizeof(Stack*));
+	if (x == NULL) {
+		return 0;
+	}
+	Stack* d = (Stack*)malloc(sizeof(Stack*));
+	if (d == NULL) {
+		return 0;
+	}
+	for (int i = 0; i < counter - n; i++) {
+		push(x, pop(s));
+	}
+	for (int j = 0; j < n; j++) {
+		push(d, pop(s));
+	}
+	for (int c = 0; c < counter - n; c++) {
+		push(s, pop(x));
+	}
+	for (int l = 0; l < n; l++) {
+		push(s, pop(d));
+	}
+	//to do free
 }

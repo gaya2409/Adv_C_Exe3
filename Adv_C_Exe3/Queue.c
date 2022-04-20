@@ -57,12 +57,22 @@ int isEmptyQueue(const Queue* q)
 
 void rotateQueue(Queue* q)
 {
-	// add your code here
+	if (isEmptyQueue(q) == NULL) {
+		return 0;
+}
+	intNode* tmp;
+	tmp = (intNode*)malloc(sizeof(intNode));
+	if (tmp == NULL) {
+		return 0;
+	}
+	tmp = dequeue(q);
+	tmp->next = q->head;
+	// to do free
 }
 
 void cutAndReplace(Queue* q)
 {
-	// add your code here
+
 }
 
 void sortKidsFirst(Queue* q)
