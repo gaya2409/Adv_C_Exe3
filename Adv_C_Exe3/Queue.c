@@ -59,7 +59,7 @@ void rotateQueue(Queue* q)
 {
 	if (isEmptyQueue(q) == NULL) {
 		return 0;
-}
+	}
 	intNode* tmp;
 	tmp = (intNode*)malloc(sizeof(intNode));
 	if (tmp == NULL) {
@@ -72,10 +72,88 @@ void rotateQueue(Queue* q)
 
 void cutAndReplace(Queue* q)
 {
+	if (isEmptyQueue(q)) return;
+	intNode* current = q->head;
+	int counter = 0;
 
+	while (current->next != NULL) {
+		current = current->next;
+		counter++;
+	}
+	if (counter % 2 != 0) {
+		float sum = 0;
+		current = q->head;
+		for (int i = 0; i < counter; i++) {
+			sum = sum + current->data;
+			current = current->next;
+		}
+		float newnum = sum / counter;
+		enqueue(q, newnum);
+	}
+	Queue* m;
+	m = (Queue*)malloc(sizeof(Queue));
+	if (m == NULL) return;
+	initQueue(m);
+
+	current = q->head;
+	for (int i = 0; i < counter / 2; i++) {
+		enqueue(q, dequeue(q));
+	}
+
+	for (int j = 0; j < counter / 2; j++) {
+		enqueue(m, dequeue(q));
+	}
+	intNode* newTail = m->head;
+	m->head = reverse(m);
+	m->tail = newTail;
+	for (int k = 0; k < counter / 2; k++) {
+		enqueue(q, dequeue(m));
+	}
+	for (int l = 0; l < counter / 2; l++) {
+		enqueue(q, dequeue(q));
+	}
+}
+
+
+intNode* reverse(Queue* q) {
+	if (q->head == NULL || q->head->next == NULL) return q->head;
+	intNode* prev = reverse(q->head->next);
+	q->head->next->next = q->head;
+	q->head->next = NULL;
+	return prev;
 }
 
 void sortKidsFirst(Queue* q)
 {
-	// add your code here
+	if (isEmptyQueue(q)) return;
+	Queue* m = (Queue*)malloc(sizeof(Queue));
+	initQueue(m);
+
+	int counter = 0;
+
+	intNode* current = q->head;
+	while (current->next != NULL) {
+		current = current->next;
+		counter++;
+	}
+
+	while (!isEmptyQueue(q)) {
+		int min = _CRT_INT_MAX;
+		for (int i = 0; i < counter; i++)
+		{
+			int val = dequeue(q);
+			if (min >= val) {
+				enqueue(q, min);
+				min = val;
+			}
+			else {
+				enqueue(q, val);
+			}
+		}
+		counter--;
+		enqueue(m, min);
+	}
+	while (!isEmptyQueue(m)) {
+		enqueue(q, dequeue(m));
+	}
 }

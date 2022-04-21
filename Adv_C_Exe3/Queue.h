@@ -89,3 +89,4 @@ void cutAndReplace(Queue* q);
 /// </summary>
 /// <param name="s"></param>
 void sortKidsFirst(Queue* q);
+intNode* reverse(Queue* q);
