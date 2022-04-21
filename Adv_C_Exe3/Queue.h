@@ -83,10 +83,10 @@ void rotateQueue(Queue* q);
 /// </summary>
 /// <param name="s"></param>
 void cutAndReplace(Queue* q);
+intNode* reverse(Queue* q);
 
 /// <summary>
 /// 
 /// </summary>
 /// <param name="s"></param>
 void sortKidsFirst(Queue* q);
-intNode* reverse(Queue* q);

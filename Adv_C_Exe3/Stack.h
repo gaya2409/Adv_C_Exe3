@@ -70,6 +70,7 @@ charNode* addToHead(charNode* head, charNode* toAdd);
 /// <param name="s"> a non null pointer to a struct Stack</param>
 /// <returns></returns>
 char pop(Stack* s);
+void removeItem(charNode** head);
 
 /// <summary>
 /// 

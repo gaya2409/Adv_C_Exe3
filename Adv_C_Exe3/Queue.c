@@ -25,7 +25,7 @@ void enqueue(Queue* q, unsigned int data)
 	//check allocation code added here…
 	p->data = data; // set element data
 	p->next = NULL;
-	if (!isEmpty(q)) q->tail->next = p; // not Empty?
+	if (!isEmptyQueue(q)) q->tail->next = p; // not Empty?
 	//Add after last:
 	else q->head = p; // Otherwise – it becomes
 	//first
@@ -34,7 +34,7 @@ void enqueue(Queue* q, unsigned int data)
 
 unsigned int dequeue(Queue* q)
 {
-	if (isEmpty(q))
+	if (isEmptyQueue(q))
 	{
 		printf("Cannot dequeue an empty queue!");
 		return 0;

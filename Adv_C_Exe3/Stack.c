@@ -69,28 +69,26 @@ int isEmptyStack(const Stack* s)
 	return (!(s->head));
 }
 
-
+void print(charNode* head)
+{
+	charNode* tmp;
+	tmp = head;
+	while (tmp != NULL) {
+		printf(" %d ", tmp->data);
+		tmp = tmp->next;
+	}
+}
 
 void display(Stack* s)
 {
 	print(s->head);
 }
 
-void print(charNode* head)
-{
-	charNode* tmp;
-	tmp = head;
-	while (tmp != NULL) {
-		printf(" % d ", tmp->data);
-		tmp = tmp->next;
-	}
-}
-
 /*************** Functions using stacks - Implementation/definition **************************/
 
 void flipBetweenHashes(const char* sentence)
 {
-	Stack* reverse;
+	Stack* reverse = (Stack*)malloc(sizeof(Stack));
 	initStack(reverse);
 	for (int i = 0; i < strlen(sentence); i++) {
 
