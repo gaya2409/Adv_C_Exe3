@@ -1,6 +1,6 @@
 #include "Stack.h"
 #include <stdio.h>
-
+#include <stdlib.h>
 
 
 //typedef struct charNode {
@@ -49,10 +49,10 @@ charNode* addToHead(charNode* head, charNode* toAdd) {
 char pop(Stack* s) {
 
 	char res;
-	if (isEmptyStack(s)) { printf("\nSTACK IS EMPTY"); return 0; }
+	if (isEmptyStack(s)) { printf("\nSTACK IS EMPTY\n"); return 0; }
 	res = s->head->data;
 	removeItem(&(s->head));//pop it from the stack 
-	return(res);
+	return res;
 }
 
 
@@ -66,15 +66,14 @@ void removeItem(charNode** head) {
 
 int isEmptyStack(const Stack* s)
 {
-	return (!(s->head));
+	return !(s->head);
 }
 
 void print(charNode* head)
 {
-	charNode* tmp;
-	tmp = head;
+	charNode* tmp = head;
 	while (tmp != NULL) {
-		printf(" %d ", tmp->data);
+		printf("%c", tmp->data);
 		tmp = tmp->next;
 	}
 }
@@ -88,20 +87,22 @@ void display(Stack* s)
 
 void flipBetweenHashes(const char* sentence)
 {
-	Stack* reverse = (Stack*)malloc(sizeof(Stack));
-	initStack(reverse);
 	for (int i = 0; i < strlen(sentence); i++) {
 
 		if (sentence[i] == '#') {
-			int j = 0;
+			int j = 1;
 
-			while (sentence[j] != '#') {
-				push(reverse, reverse->head->data);
+			Stack* reverse = (Stack*)malloc(sizeof(Stack));
+			initStack(reverse);
+			while (i+j < strlen(sentence) && sentence[i+j] != '#') {
+				push(reverse, sentence[i + j]);
 				j++;
 			}
 			display(reverse);
+			destroyStack(reverse);
+			i += j;
 		}
-		else printf("%d", sentence[i]);
+		else printf("%c", sentence[i]);
 	}
 }
 
@@ -127,7 +128,7 @@ int isPalindrome(Stack* s)
 void rotateStack(Stack* s, int n)
 {
 
-	if (n < 0 || isEmptyStack(s)) return;
+	if (n <= 0 || isEmptyStack(s)) return;
 
 	charNode* current = s->head;
 	int counter = 0;
@@ -141,10 +142,12 @@ void rotateStack(Stack* s, int n)
 	if (x == NULL) {
 		return 0;
 	}
+	initStack(x);
 	Stack* d = (Stack*)malloc(sizeof(Stack*));
 	if (d == NULL) {
 		return 0;
 	}
+	initStack(d);
 	for (int i = 0; i < counter - n; i++) {
 		push(x, pop(s));
 	}

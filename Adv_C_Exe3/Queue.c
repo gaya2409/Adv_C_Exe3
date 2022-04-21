@@ -1,5 +1,6 @@
 #include "Queue.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /***************** Queue ADT Implementation *****************/
 
@@ -60,14 +61,13 @@ void rotateQueue(Queue* q)
 	if (isEmptyQueue(q) == NULL) {
 		return 0;
 	}
-	intNode* tmp;
-	tmp = (intNode*)malloc(sizeof(intNode));
+	intNode* tmp = (intNode*)malloc(sizeof(intNode));
 	if (tmp == NULL) {
 		return 0;
 	}
-	tmp = dequeue(q);
+	tmp->data = dequeue(q);
 	tmp->next = q->head;
-	// to do free
+	q->head = tmp;
 }
 
 void cutAndReplace(Queue* q)

@@ -9,7 +9,7 @@ typedef struct charNode
 {
 	char data;
 	struct charNode* next;
-}charNode;
+} charNode;
 
 /// <summary>
 /// 
@@ -17,7 +17,7 @@ typedef struct charNode
 typedef struct Stack 
 {
 	charNode* head;
-}Stack;
+} Stack;
 
 /// <summary>
 /// Initializes a stack structure.
