@@ -99,7 +99,7 @@ void main()
 	printf("dequeue expects '5'='%d'\n", dequeue(q));
 	printf("dequeue expects '6'='%d'\n", dequeue(q));
 	printf("dequeue expects '9'='%d'\n", dequeue(q));
-
+	printf("isEmptyQueue expects '1'='%d'\n", isEmptyQueue(q));
 	destroyQueue(q);
 	free(q);
 }

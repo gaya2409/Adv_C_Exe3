@@ -134,13 +134,14 @@ void sortKidsFirst(Queue* q)
 	int counter = 0;
 
 	intNode* current = q->head;
-	while (current->next != NULL) {
+	while (current != NULL) {
 		current = current->next;
 		counter++;
 	}
 
 	while (!isEmptyQueue(q)) {
-		int min = _CRT_INT_MAX;
+		int min = dequeue(q);
+		counter--;
 		for (int i = 0; i < counter; i++)
 		{
 			int val = dequeue(q);
@@ -152,7 +153,6 @@ void sortKidsFirst(Queue* q)
 				enqueue(q, val);
 			}
 		}
-		counter--;
 		enqueue(m, min);
 	}
 	while (!isEmptyQueue(m)) {
