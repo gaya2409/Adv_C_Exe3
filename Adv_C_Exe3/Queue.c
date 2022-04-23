@@ -77,11 +77,12 @@ void cutAndReplace(Queue* q)
 	if (isEmptyQueue(q)) return;
 	intNode* current = q->head;
 	int counter = 0;
-
-	while (current->next != NULL) {
+	//count items in queue
+	while (current != NULL) {
 		current = current->next;
 		counter++;
 	}
+	//if item cound is odd, add the average to the end of the queue
 	if (counter % 2 != 0) {
 		float sum = 0;
 		current = q->head;
@@ -91,13 +92,13 @@ void cutAndReplace(Queue* q)
 		}
 		float newnum = sum / counter;
 		enqueue(q, newnum);
+		counter++;
 	}
 	Queue* m;
 	m = (Queue*)malloc(sizeof(Queue));
-	if (m == NULL) return;
+	if (m == NULL) { printf("malloc failed"); return; }
 	initQueue(m);
 
-	current = q->head;
 	for (int i = 0; i < counter / 2; i++) {
 		enqueue(q, dequeue(q));
 	}
@@ -106,7 +107,7 @@ void cutAndReplace(Queue* q)
 		enqueue(m, dequeue(q));
 	}
 	intNode* newTail = m->head;
-	m->head = reverse(m);
+	m->head = reverse(m->head);
 	m->tail = newTail;
 	for (int k = 0; k < counter / 2; k++) {
 		enqueue(q, dequeue(m));
@@ -116,12 +117,11 @@ void cutAndReplace(Queue* q)
 	}
 }
 
-
-intNode* reverse(Queue* q) {
-	if (q->head == NULL || q->head->next == NULL) return q->head;
-	intNode* prev = reverse(q->head->next);
-	q->head->next->next = q->head;
-	q->head->next = NULL;
+intNode* reverse(intNode* head) {
+	if (head == NULL || head->next == NULL) return head;
+	intNode* prev = reverse(head->next);
+	head->next->next = head;
+	head->next = NULL;
 	return prev;
 }
 
